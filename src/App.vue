@@ -25,9 +25,8 @@
               <div>
                 <img
                   class="imgBrazao"
-                  :src="require(`@/assets/${house.slug.toLowerCase()}.png`)"
-                  alt="house"
-                />
+                  :src="getImgUrl(house.slug)  "/>
+                
               </div>
               <div class="nome">House {{ house.slug }}</div>
             </button>
@@ -116,6 +115,15 @@ export default {
       console.log("IDselecionado: ", this.selectedCharDetails.id);
       if (char.id === this.selectedCharDetails.id) return true;
       return false;
+    },
+      getImgUrl(filename){
+      try{ 
+        console.log('FILENAME',filename)
+        return require(`@/assets/${filename}.png`)
+      }catch(_){
+         console.log('FILENAME',filename)
+        return require(`@/assets/default.png`)
+      }
     },
   },
   mounted() {
@@ -361,19 +369,19 @@ export default {
 }
 .citacaoContainer {
   display: flex;
-  align-items: flex-start;
+  align-items:flex-start;
   flex-direction: column;
   margin: 5px 35px 5px 35px;
 }
 .citacao {
   display: flex;
-  align-items: center;
+  align-items:initial;
   font-family: Garamond;
   font-style: italic;
   font-weight: normal;
   font-size: 12px;
   line-height: 22px;
-  text-align: center;
+  text-align:left;
 }
 .namePerson {
   font-family: Georgia, "Times New Roman", Times, serif;
