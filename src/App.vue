@@ -23,10 +23,7 @@
               "
             >
               <div>
-                <img
-                  class="imgBrazao"
-                  :src="getImgUrl(house.slug)  "/>
-                
+                <img class="imgBrazao" :src="getImgUrl(house.slug)" />
               </div>
               <div class="nome">House {{ house.slug }}</div>
             </button>
@@ -105,24 +102,18 @@ export default {
   components: {},
   methods: {
     selectedHouseCss: function (house) {
-      console.log("HouseCss: ", house);
-
       if (house.slug === this.selectedHouse.slug) return true;
       return false;
     },
     selectedCharacterCss: function (char) {
-      console.log("ID: ", char);
-      console.log("IDselecionado: ", this.selectedCharDetails.id);
       if (char.id === this.selectedCharDetails.id) return true;
       return false;
     },
-      getImgUrl(filename){
-      try{ 
-        console.log('FILENAME',filename)
-        return require(`@/assets/${filename}.png`)
-      }catch(_){
-         console.log('FILENAME',filename)
-        return require(`@/assets/default.png`)
+    getImgUrl(filename) {
+      try {
+        return require(`@/assets/${filename}.png`);
+      } catch (_) {
+        return require(`@/assets/default.png`);
       }
     },
   },
@@ -131,7 +122,6 @@ export default {
       .get("https://game-of-thrones-quotes.herokuapp.com/v1/houses")
       .then((response) => {
         this.houses = response.data;
-        console.log("Houses:", this.houses);
       });
     axios.get("https://thronesapi.com/api/v2/Characters").then((response) => {
       this.characters = response.data;
@@ -159,7 +149,6 @@ export default {
   },
   watch: {
     selectedHouse: function (nval) {
-      console.log("NVAL:", nval);
       this.selectedCharacters = this.characters.filter((char) => {
         if (
           char.lastName
@@ -172,13 +161,12 @@ export default {
             .toLocaleLowerCase()
             .includes(nval.slug.toLocaleLowerCase())
         ) {
-          console.log("Personagens: ", this.selectedCharacters);
           return char;
         }
       });
     },
     selectedCharDetails: function (n) {
-      console.log("chardetails", n);
+      console.log(n);
       const found = this.details.find((d) => {
         if (
           this.selectedCharDetails.fullName
@@ -191,8 +179,6 @@ export default {
             .toLocaleLowerCase()
             .includes(d.character.name.toLocaleLowerCase())
         ) {
-          console.log("d:", d);
-
           this.selectedCharDetails.sentence = d.sentence;
           return found;
         }
@@ -210,7 +196,6 @@ export default {
   display: flex;
   flex-direction: column;
   padding-left: 5rem;
-  /* background-color: green; */
 }
 .header {
   display: flex;
@@ -234,7 +219,6 @@ export default {
 .col1 {
   display: flex;
   flex-direction: column;
-  /* margin: 0px 70px 0px 10px; */
   background-color: rgba(0, 0, 0, 0);
 }
 
@@ -317,8 +301,7 @@ export default {
   display: flex;
   flex-direction: row;
   align-items: center;
-  color: #FFFFFF;
-  
+  color: #ffffff;
 }
 .nome {
   margin: 0px 0px 0px 15px;
@@ -328,10 +311,9 @@ export default {
   font-size: 14px;
   line-height: 17px;
   text-transform: capitalize;
-  
 }
 .teste {
-  background-color: #DEDEDE;
+  background-color: #dedede;
   color: #414141;
 }
 .imgBrazao {
@@ -369,19 +351,19 @@ export default {
 }
 .citacaoContainer {
   display: flex;
-  align-items:flex-start;
+  align-items: flex-start;
   flex-direction: column;
   margin: 5px 35px 5px 35px;
 }
 .citacao {
   display: flex;
-  align-items:initial;
+  align-items: initial;
   font-family: Garamond;
   font-style: italic;
   font-weight: normal;
   font-size: 12px;
   line-height: 22px;
-  text-align:left;
+  text-align: left;
 }
 .namePerson {
   font-family: Georgia, "Times New Roman", Times, serif;
